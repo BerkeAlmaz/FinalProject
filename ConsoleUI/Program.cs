@@ -10,11 +10,19 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            //DTO - Data Transformation Object
             //SOLID
             //Open Closed Principle
 
-            //ProductTest();
+            ProductTest();
+            //CategoryTest();
 
+           
+
+        }
+
+        private static CategoryManager CategoryTest()
+        {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
             foreach (var category in categoryManager.GetAll())
@@ -22,19 +30,16 @@ namespace ConsoleUI
                 Console.WriteLine(category.CategoryName);
             }
 
-            Console.WriteLine("---------------------------------------------");
-
-            Console.WriteLine(categoryManager.GetById(2).CategoryName);
-
+            return categoryManager;
         }
 
         private static void ProductTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetByUnitPrice(80, 100))
+            foreach (var product in productManager.GetProductDetails())
             {
-                Console.WriteLine(product.ProductName);
+                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
             }
         }
     }
