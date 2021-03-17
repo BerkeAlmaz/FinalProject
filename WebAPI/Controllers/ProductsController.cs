@@ -29,13 +29,26 @@ namespace WebAPI.Controllers
         {
             //Dependency chain
 
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             var result = _productService.GetAll();
 
             if (result.Success)
             {
                 return Ok(result);
             }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _productService.GetAllByCategory(categoryId);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
             return BadRequest(result);
         }
 
